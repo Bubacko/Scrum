@@ -58,3 +58,24 @@ if (place_meeting(x, y+vspd, obj_solid)) {
 
 // Move vertically
 y += vspd;
+
+// Control the sprites
+if (yprevious != y) { //moving vertically?
+    sprite_index = spr_player_jump;
+    image_speed = 0;
+    image_index = y > yprevious; // wenn wahr (1), dann down, wenn falsch (0) dann up
+} else {
+    if (xprevious != x) { //moving horizontally?
+        sprite_index = spr_player_walk;
+        image_speed = .3;       
+    } else{
+        sprite_index = spr_player_stand;
+    }
+}
+
+// Control direction player is facing
+if (xprevious < x){ // moving to right
+    image_xscale = 1;
+} else if (xprevious > x){ // moving to left
+    image_xscale = -1;
+}
